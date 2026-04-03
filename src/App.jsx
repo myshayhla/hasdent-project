@@ -15,6 +15,7 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import LanguageRedirect from "./components/languageRedirect/LanguageRedirect.jsx";
 import ProductDetail from "./pages/productDetail/ProductDetail.jsx";
+import FilterProducts from "./pages/filterProducts/filterProducts.jsx";
 
 function App() {
   useEffect(() => {
@@ -39,10 +40,12 @@ function App() {
               <Route path="/contact-us" element={<ContactPage />} />
               <Route path="/news/:id" element={<NewsDetail />} />
               <Route path="/news" element={<NewsPage />} />
+              <Route path="/products" element={<ProductsPage />} />
               <Route
                 path="/products/:categoryID/:subcategoryId"
-                element={<ProductsPage />}
+                element={<FilterProducts />}
               />
+
               <Route path="/products/:id" element={<ProductDetail />} />
 
               {/*   English */}
@@ -51,9 +54,10 @@ function App() {
               <Route path="/en/services" element={<ServicesPage />} />
               <Route path="/en/partners" element={<Partners />} />
               <Route path="/en/contact-us" element={<ContactPage />} />
+              <Route path="/en/products" element={<ProductsPage />} />
               <Route
                 path="en/products/:categoryID/:subcategoryId"
-                element={<ProductsPage />}
+                element={<FilterProducts />}
               />
               <Route path="en/products/:id" element={<ProductDetail />} />
 
@@ -65,10 +69,10 @@ function App() {
               <Route path="/ru/services" element={<ServicesPage />} />
               <Route path="/ru/partners" element={<Partners />} />
               <Route path="/ru/contact-us" element={<ContactPage />} />
+              <Route path="/ru/products" element={<ProductsPage />} />
               <Route
                 path="ru/products/:categoryID/:subcategoryId"
-                element={<ProductsPage />}
-              />
+                element={<FilterProducts />} />
               <Route path="ru/products/:id" element={<ProductDetail />} />
               <Route path="/ru/news" element={<NewsPage />} />
               <Route path="/ru/news/:id" element={<NewsDetail />} />

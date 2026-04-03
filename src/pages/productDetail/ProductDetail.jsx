@@ -70,27 +70,31 @@ const { t, i18n } = useTranslation();
             <div className="text-side" data-aos="fade-up">
               <div className="head">
                 <h3>{detail?.title?.[currentLanguage] || detail?.title?.az}</h3>
-                <div
-                  className="d-none d-md-block"
-                  onClick={() => {
-                    console.log("ready");
-                    const link = document.createElement("a");
-
-                    link.href = `https://manager.hasdent.az${detail.pdfFile}`;
-                    link.download = "katalog.pdf"; // fayl adı
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                  }}
-                >
-                  <ReadMore title={"Kataloqu endir"} />
+                <div className="d-none d-md-block">
+                  <Link
+                    to={
+                      detail?.pdfFile
+                        ? `https://manager.hasdent.az${detail.pdfFile}`
+                        : "#"
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => {
+                      if (!detail?.pdfFile) {
+                        e.preventDefault();
+                        onOpen();
+                      }
+                    }}
+                  >
+                    <ReadMore title={"Kataloqu endir"} />
+                  </Link>
                 </div>
               </div>
               <div className="content">
                 <div>
                   {parse(
                     detail?.description?.[currentLanguage] ||
-                      detail?.description?.az
+                      detail?.description?.az,
                   )}
                 </div>
               </div>

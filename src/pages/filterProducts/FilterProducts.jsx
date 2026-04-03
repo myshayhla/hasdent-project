@@ -1,30 +1,26 @@
-import React, { useEffect, useState } from "react";
-import "./Style.scss";
-import Card1 from "../../assets/images/BestSellerCard.webp";
-import { IoIosArrowDown } from "react-icons/io";
-import { CiSearch } from "react-icons/ci";
-import ReadMore from "../readMore/ReadMore";
-import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import "./Stye.scss";
+import HeroSection from '../../components/HeroSection/HeroSection';
+import ProductsSec from '../../components/productsSec/ProductsSec';
+import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
 import parse from "html-react-parser";
 
-export default function ProductsSec() {
-const { categoryId, subcategoryId } = useParams(); // URL: /products/:subcategoryId
-const [products, setProducts] = useState([]);
-const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+function FilterProducts() {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const { subcategoryId } = useParams();
+    
 
-  useEffect(() => {
-    const fetchProducts = async () => {
+     useEffect(() => {
+     const fetchProducts = async () => {
       setLoading(true);
     
       try {
-         let allProducts = [];
-         let page = 1;
-         let totalPages = 1;
-       const { data } = await axios.get(
-         `https://manager.hasdent.az/api/products?page=1&limit=100`,
-       );
+        const { data } = await axios.get(
+          `https://manager.hasdent.az/api/products?subcategoryID=${subcategoryId}`
+        );
         console.log(data); // ← bunı əlavə et
         setProducts(data?.data || data?.products || data || []);
       } catch (err) {
@@ -34,17 +30,15 @@ const [loading, setLoading] = useState(true);
       }
     };
     fetchProducts();
-  }, []);
+  }, [subcategoryId]);
   if (loading) return <p>Yüklənir...</p>;
   if (error) return <p>{error}</p>;
   
-  if (products.length === 0) return <p>məhsul tapılmadı.</p>;
-  
-
-  
+  if (products.length === 0) return <p>Bu subcategory-də məhsul yoxdur.</p>;
 
   return (
     <>
+      <HeroSection page={" Məhsullar"} />
       <section id="products-sec">
         <div className="products row g-0">
           {products.map((item) => (
@@ -67,8 +61,8 @@ const [loading, setLoading] = useState(true);
                       {item.description?.az
                         ? parse(
                             item.description.az.length > 0
-                              ? item.description.az.slice(0,20) + "..."
-                              : item.description.az
+                              ? item.description.az.slice(0, 20) + "..."
+                              : item.description.az,
                           )
                         : ""}
                     </p>
@@ -83,3 +77,5 @@ const [loading, setLoading] = useState(true);
     </>
   );
 }
+
+export default FilterProducts;

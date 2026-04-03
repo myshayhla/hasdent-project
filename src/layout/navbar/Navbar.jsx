@@ -149,7 +149,7 @@ export default function Navbar() {
           {/* <div className="border position-relative  g-0 m-0 p-0 gap-0"> */}
           <div className="productDiv d-flex align-items-center">
             <Link
-              // to={createLanguageAwarePath("/products")}
+              to={createLanguageAwarePath("/products")}
               className="nav-link d-flex  align-items-center gap-2"
             >
               <span>{t("header.products")}</span>

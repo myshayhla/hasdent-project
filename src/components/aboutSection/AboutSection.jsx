@@ -52,7 +52,7 @@ export default function AboutSection({ buttonType = "about", subcategoryId = nul
           <h1 className="about-title">{t("home.aboutSection.title")}</h1>
           <p>{t("home.aboutSection.subtitle")}</p>
           <div>
-            <Link to={buttonLink}>
+            <Link to={createLanguageAwarePath("/products")}>
               <ReadMore title={buttonText} />
             </Link>
           </div>

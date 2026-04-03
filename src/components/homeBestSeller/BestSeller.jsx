@@ -75,11 +75,7 @@ export default function BestSeller() {
           <h1 className="py-4 fs-2">{t("home.productSec.highsale")}</h1>
 
           {randomProduct && (
-            <Link
-              to={createLanguageAwarePath(
-                `/products/${randomProduct.categoryID}/${randomProduct.subcategoryID}`
-              )}
-            >
+            <Link to={createLanguageAwarePath("/products")}>
               <ReadMore title={t("btn.readMore")} />
             </Link>
           )}
@@ -107,7 +103,7 @@ export default function BestSeller() {
                         ? parse(
                             item.description.az.length > 10
                               ? item.description.az.slice(0, 15) + "..."
-                              : item.description.az
+                              : item.description.az,
                           )
                         : ""}
                     </div>
