@@ -19,7 +19,7 @@ function FilterProducts() {
     
       try {
         const { data } = await axios.get(
-          `https://manager.hasdent.az/api/products?subcategoryID=${subcategoryId}`
+          `https://manager.hasdent.az/api/products?subcategoryID=${subcategoryId}&page=1&limit=100`,
         );
         console.log(data); // ← bunı əlavə et
         setProducts(data?.data || data?.products || data || []);
@@ -41,7 +41,7 @@ function FilterProducts() {
       <HeroSection page={" Məhsullar"} />
       <section id="products-sec">
         <div className="products row g-0">
-          {products.map((item) => (
+          {products.slice().reverse().map((item) => (
             <Link to={`/products/${item.id}`}>
               <div key={item.id} className="product-card">
                 <div className="card-container">
