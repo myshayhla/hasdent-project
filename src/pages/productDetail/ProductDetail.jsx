@@ -14,7 +14,7 @@ import {
   addLanguageToPath,
   removeLanguageFromPath,
 } from "../../utils/languageUtils";
-
+import Swal from "sweetalert2";
 
 function ProductDetail() {
   const { id } = useParams();
@@ -29,6 +29,21 @@ const { t, i18n } = useTranslation();
   const [detail, setDetail] = useState(null);
   const [loading, setLoading] = useState(true);
   
+  //for modal kataloq
+  const handleCatalogClick = (e) => {
+    if (!detail?.pdfFile) {
+      e.preventDefault();
+
+      Swal.fire({
+        icon: "info",
+        title: "Kataloq mövcud deyil",
+        text: "Bu məhsul üçün PDF kataloq əlavə olunmayıb.",
+        confirmButtonText: "Bağla",
+      });
+
+      return;
+    }
+  };
 
   useEffect(() => {
     axios
@@ -79,12 +94,7 @@ const { t, i18n } = useTranslation();
                     }
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={(e) => {
-                      if (!detail?.pdfFile) {
-                        e.preventDefault();
-                        onOpen();
-                      }
-                    }}
+                    onClick={handleCatalogClick}
                   >
                     <ReadMore title={"Kataloqu endir"} />
                   </Link>
@@ -99,7 +109,18 @@ const { t, i18n } = useTranslation();
                 </div>
               </div>
               <div className="d-block d-md-none">
-                <ReadMore title={"Katalogu endir"} />
+                <Link
+                  to={
+                    detail?.pdfFile
+                      ? `https://manager.hasdent.az${detail.pdfFile}`
+                      : "#"
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleCatalogClick}
+                >
+                  <ReadMore title={"Kataloqu endir"} />
+                </Link>
               </div>
             </div>
           </div>

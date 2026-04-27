@@ -102,13 +102,10 @@ export default function Footer() {
                 <IoIosArrowForward />
                 <Link to={"/news"}>{t("header.news")} </Link>
               </li>
+              
               <li>
                 <IoIosArrowForward />
-                <Link to={""}>{t("header.products")} </Link>
-              </li>{" "}
-              <li>
-                <IoIosArrowForward />
-                <Link to={"about"}>{t("header.partners")} </Link>
+                <Link to={"/partners"}>{t("header.partners")} </Link>
               </li>
               <li>
                 <IoIosArrowForward />
